@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_u=ggq#4t=rm_nwt(jo*r4#$9$%nb8c41bkfgjozk14mn7kxw&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = false
 
 ALLOWED_HOSTS = []
 
@@ -124,3 +124,4 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'patients',  # ← add this line
 ]
+ALLOWED_HOSTS = ['yourusername.pythonanywhere.com', '127.0.0.1']
