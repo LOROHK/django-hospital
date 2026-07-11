@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Patient, Doctor, Visit, Department, Appointment
+from .models import Patient, Doctor, Visit, Department, Appointment, Billing
 
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
@@ -30,3 +30,10 @@ class AppointmentAdmin(admin.ModelAdmin):
     list_filter = ('status', 'appointment_date')
     search_fields = ('patient__first_name', 'patient__last_name', 'doctor__first_name')
     date_hierarchy = 'appointment_date'
+
+@admin.register(Billing)
+class BillingAdmin(admin.ModelAdmin):
+    list_display = ('id', 'visit', 'amount', 'payment_status', 'insurance_claimed', 'invoice_date')
+    list_filter = ('payment_status', 'insurance_claimed', 'invoice_date')
+    search_fields = ('visit__patient__first_name', 'visit__patient__last_name')
+    date_hierarchy = 'invoice_date'

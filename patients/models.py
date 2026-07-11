@@ -70,3 +70,22 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.patient} - {self.appointment_date}"
+
+
+class Billing(models.Model):
+    PAYMENT_STATUS = [
+        ('Pending', 'Pending'),
+        ('Paid', 'Paid'),
+        ('Insurance', 'Insurance'),
+        ('Write-off', 'Write-off'),
+    ]
+
+    visit = models.ForeignKey(Visit, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    insurance_claimed = models.BooleanField(default=False)
+    payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS, default='Pending')
+    invoice_date = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Bill #{self.id} - {self.visit.patient} - {self.amount}"
